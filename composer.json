@@ -4,7 +4,7 @@
     "url":"#https://github.com/wi-development/user",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
-    "type": "project",
+    "type": "package",
     "minimum-stability": "dev",
     "authors": [
         {
