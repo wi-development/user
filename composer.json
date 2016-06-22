@@ -1,0 +1,33 @@
+{
+    "name": "wi-development/user",
+    "description": "Handles the user",
+    "url":"#https://github.com/wi-development/user",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Tonny Wijnand",
+            "email": "tonnywijnand@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WI\\User\\": "src"
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+
+        ],
+        "post-create-project-cmd": [
+
+        ],
+        "post-install-cmd": [
+        ],
+        "post-update-cmd": [
+        ]
+    },
+    "require": {}
+}
