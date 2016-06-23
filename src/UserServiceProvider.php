@@ -24,10 +24,10 @@ class UserServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-		if (is_dir(base_path() . '/resources/views/admin/user')) {
-			$this->loadViewsFrom(base_path() . '/resources/views/admin/dasboard', 'user');
+	    if (is_dir(base_path() . '/resources/views/admin/user')) {
+			$this->loadViewsFrom(base_path() . '/resources/views/admin/user', 'user');
 		} else {
-			$this->loadViewsFrom(__DIR__.'/views', 'user');
+		    $this->loadViewsFrom(__DIR__.'/views/admin', 'user');
 		}
 
 		if (!$this->app->routesAreCached()) {
