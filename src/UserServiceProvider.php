@@ -36,19 +36,19 @@ class UserServiceProvider extends ServiceProvider
 
 
 		//config
-	    $this->publishes([
-		    __DIR__.'/config/contact.php' => config_path('wi/contact.php'),
-	    ],'wi-config');
+	    //$this->publishes([
+		//    __DIR__.'/config/user.php' => config_path('wi/user.php'),
+	    //],'user-config');
 
 		//user
 	    $this->publishes([
 		    __DIR__.'/views/admin' => base_path('resources/views/admin/user')
-	    ],'wi-view');
+	    ],'user-view');
 
 	    //auth
 		$this->publishes([
 			__DIR__.'/views/auth' => base_path('resources/views/auth'),
-		],'wi-auth');
+		],'user-auth');
     }
 	
 	/**
@@ -86,12 +86,11 @@ class UserServiceProvider extends ServiceProvider
 	    //dc(config('wi.dashboard.admin_prefix'));
 	    //Carbon::setLocale(config('app.locale'));
 	    $this->app->make('WI\User\UserController');
-	    ////$this->app->singleton('WI\User\Settings' ,function(){
+	    $this->app->singleton('WI\User\Settings' ,function(){
 		    //$user = User::find(3);
 		    //\Auth::login($user);
-
-		    //////return \Auth::user()->settings();
-	    /////});
+		    return \Auth::user()->settings();
+	    });
 		//$this->app->register(Vendor\Package\Providers\RouteServiceProvider::class);
     }
 }

@@ -27,6 +27,8 @@
         "post-install-cmd": [
         ],
         "post-update-cmd": [
+            "php artisan vendor:publish --tag=user-view",
+            "php artisan vendor:publish --tag=user-auth"
         ]
     },
     "require": {}
