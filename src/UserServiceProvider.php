@@ -8,15 +8,15 @@ use Illuminate\Routing\Router;
 
 class UserServiceProvider extends ServiceProvider
 {
-    
-	
+
+
     /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
     #protected $defer = true;
-	
+
 	/**
      * Bootstrap the application services.
      *
@@ -50,7 +50,7 @@ class UserServiceProvider extends ServiceProvider
 			__DIR__.'/views/auth' => base_path('resources/views/auth'),
 		],'user-auth');
     }
-	
+
 	/**
 		 * Define the routes for the application.
 		 *
@@ -83,13 +83,15 @@ class UserServiceProvider extends ServiceProvider
      */
     public function register()
     {
-	    //dc(config('wi.dashboard.admin_prefix'));
+        //dc('register UserServiceProvider');
+        //dc(config('wi.dashboard.admin_prefix'));
 	    //Carbon::setLocale(config('app.locale'));
 	    $this->app->make('WI\User\UserController');
 	    $this->app->singleton('WI\User\Settings' ,function(){
 		    //$user = User::find(3);
 		    //\Auth::login($user);
-		    return \Auth::user()->settings();
+
+            return \Auth::user()->settings();
 	    });
 		//$this->app->register(Vendor\Package\Providers\RouteServiceProvider::class);
     }

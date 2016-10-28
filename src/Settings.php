@@ -12,7 +12,9 @@ class Settings{
 		//'foo','bar'
 		'sitemap_form_left_tab',
 		'active_language_tab',
-		'sitemap_form_reference_tab'
+		'sitemap_form_reference_tab',
+		'role_form_main_tab'
+
 	];
 
 	/**

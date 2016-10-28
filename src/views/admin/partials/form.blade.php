@@ -57,9 +57,22 @@
 
 
             <div class="form-group">
-                {!! Form::label('role_id', 'Rechten:') !!}
-                {!! Form::select('role_id',$roles , null,['class' => 'form-control']) !!}
+                {!! Form::label('usertype_id', 'Usertypes:') !!}
+                {!! Form::select('usertype_id',$usertypes , null,['class' => 'form-control']) !!}
             </div>
+
+
+            <div class="form-group">
+                {!! Form::label('role_id', 'Rechten:') !!}
+                {{Form::select('roles[]',$roles,(isset($user) ? $user->roles->pluck('id')->all() : null),['multiple'=>true,'class'=>'form-control']) }}
+            </div>
+
+
+            <div class="form-group">
+                {!! Form::label('company_id', 'Bedrijf:') !!}
+                {!! Form::select('company_id',$companies , null,['class' => 'form-control']) !!}
+            </div>
+
 
             <div class="form-group">
                 {!! Form::label('locale_id', 'Taal:') !!}
@@ -72,6 +85,28 @@
 
 
             <?php
+
+            /*
+<div class="form-group">
+{!! Form::label('role_id', 'Rechten ORG:') !!}
+{!! Form::select('role_id',$roles , null,['class' => 'form-control']) !!}
+</div>
+
+
+
+		<div class="form-group">
+			{!! Form::label('role_id', 'Rechten NEEW:') !!}
+			{!! Form::select('role_id',$roles , null,['class' => 'form-control']) !!}
+
+			@foreach ($roles as $id => $name)
+				{{dc($value)}}
+				{{Form::checkbox('roles[]',$value,$user->roles->pluck('id')->all(),array('class'=>'form-control')) }}
+				{!! Form::label('service' . $value, $role) !!}
+			@endforeach
+		</div>
+*/
+
+
             /*
             <div class="form-group">
                 {!! Form::label('password', 'Password:') !!}

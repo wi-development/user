@@ -28,7 +28,7 @@
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
         <ol class="breadcrumb">
             <li><a href="{{route('admin::dashboard')}}">Dashboard</a></li>
-            <li><a href="{{route('admin::user.index')}}">Alle gebruikers</a></li>
+            <li><a href="{{route('admin::user.all.index')}}">Alle gebruikers</a></li>
             <li class="active">Wijzigen</li>
         </ol>
 

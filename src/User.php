@@ -8,13 +8,16 @@ use Illuminate\Support\Facades\Request;
 
 class User extends Authenticatable
 {
+
+
+	use HasRoles;
   /**
    * The attributes that are mass assignable.
    *
    * @var array
    */
   protected $fillable = [
-      'name', 'username', 'email', 'password', 'role_id', 'locale_id', 'settings'
+      'name', 'username', 'email', 'password', 'role_id', 'locale_id','company_id', 'usertype_id', 'settings'
   ];
 
   /**
@@ -42,10 +45,11 @@ class User extends Authenticatable
 
   //user settings as json for view config etc.
   public function settings(){
-    //dc($this->settings);
-    //dc($this->email);
       return new Settings((array) $this->settings, $this);
   }
+
+
+  /*
 
   //returns json object
   //string to json object
@@ -59,12 +63,109 @@ class User extends Authenticatable
   public function setXSettingsAttribute($settings){
     $this->attributes['settings'] = json_encode($settings);
   }
+  */
+
+
+
+	public function isBackEndUser()
+	{
+
+		if (count($this->usertype) == 0){
+			dd('Gebruiker \''.$this->name.'\' heeft geen user type ('.count($this->usertype).')');
+		}
+		//dc(count($this->usertype));
+		//dc($this->usertype);
+		//dc($this->usertype->name);
+			return ($this->usertype->name == 'back-end');
+	}
+
+	public function isFrontEndUser()
+	{
+		//dc($this->usertype->name);
+		return ($this->usertype->name == 'front-end');
+	}
+
+
+	public function isAdmin()
+	{
+
+		if ($this->hasRole('developer')){
+			return true;
+		}
+		return false;
+/*		foreach ($this->roles()->get() as $role)
+		{
+			if ($role->name == 'Admin')
+			{
+				return true;
+			}
+		}
+
+		return false;*/
+	}
 
   //relations
   public function locale(){
-    return $this->belongsTo('WI\Locale\Locale');			//foreign key belongsTo
+  	return $this->belongsTo('WI\Locale\Locale');			//foreign key belongsTo
   }
 
+	public function company(){
+		return $this->belongsTo('WI\Core\Entities\Company\Company');			//foreign key belongsTo
+	}
+
+	public function usertype(){
+		return $this->belongsTo('WI\User\Usertype');			//foreign key belongsTo
+	}
+
+	/*
+	 * NEW ROLES PERMISSIONS put in trait HasRoles
+	 *
+
+	public function roles()
+	{
+		return $this->belongsToMany(Role::class);
+	}
+
+
+	public function assignRole($role){
+		//save can sync
+		return $this->roles()->save(
+			Role::whereName($role)->firstOrFail()
+	  );
+	}
+
+
+
+	  public function hasPermission($permission)
+	  {
+		  if (is_string($permission)){
+			  //dc('hasPermission');
+			  return true;
+			  //return $this->roles->contains('name',$permission);
+		  }
+	  }
+	//hasPermission($permission)
+
+
+
+
+	  public function hasPermission($permission)
+	  {
+		  if (is_string($permission)){
+			  dc($permission);
+			  //return true;
+			  return $this->roles->contains('name',$permission);
+		  }
+	  }
+
+  */
+
+
+
+
+  /*
+   * ORG ROLES
+   * */
   public function role()
   {
     return $this->belongsTo('WI\User\Role','role_id');	//foreign key belongsTo
@@ -72,7 +173,7 @@ class User extends Authenticatable
 
   //user roles used in middleware
 
-  public function hasRole($roles)
+  public function hasRoleX($roles)
   {
     $this->have_role = $this->getUserRole();
     // Check if the user is a root account
@@ -91,30 +192,30 @@ class User extends Authenticatable
     return false;
   }
 
-  private function getUserRole()
+  private function getUserRoleX()
   {
     return $this->role()->getResults();
   }
 
-  private function checkIfUserHasRole($need_role)
+  private function checkIfUserHasRoleX($need_role)
   {
     return (strtolower($need_role)==strtolower($this->have_role->name)) ? true : false;
   }
 
   //user permissions used in policy
 
-  public function allowedToEditAllUsers($allowedRoles){
+  public function allowedToEditAllUsersX($allowedRoles){
     if (in_array($this->getRoleName(), $allowedRoles)) {
       return true;
     }
     return false;
   }
 
-  public function editsOwnProfile($related){
+  public function editsOwnProfileX($related){
     return $this->id == $related->id;
   }
 
-  public function getRoleName(){
+  public function getRoleNameX(){
     return $this->role->name;
   }
 

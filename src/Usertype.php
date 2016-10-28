@@ -5,7 +5,7 @@ namespace WI\User;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Usertype extends Model
 {
 	/**
 	 * A role may be given various permissions.
@@ -18,7 +18,7 @@ class Role extends Model
 	];
 
 
-	public function permissions()
+	public function UITpermissions()
 	{
 		return $this->belongsToMany(Permission::class);
 	}
@@ -28,7 +28,7 @@ class Role extends Model
 	 * @param  Permission $permission
 	 * @return mixed
 	 */
-	public function givePermissionTo(Permission $permission)
+	public function UITgivePermissionTo(Permission $permission)
 	{
 		return $this->permissions()->save($permission);
 	}
@@ -36,6 +36,6 @@ class Role extends Model
 	//Role hasMany Users
 	public function users()
 	{
-		return $this->hasMany('App\User', 'role_id', 'id');
+		return $this->hasMany('App\User', 'usertype_id', 'id');
 	}
 }

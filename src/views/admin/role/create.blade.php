@@ -5,7 +5,7 @@
     <!--Page Title-->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <div id="page-title">
-        <h1 class="page-header text-overflow">Gebruikers beheer</h1>
+        <h1 class="page-header text-overflow">Rollen beheer</h1>
 
         <!--Searchbox-->
         <div class="searchbox">
@@ -25,7 +25,7 @@
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <ol class="breadcrumb">
         <li><a href="{{route('admin::dashboard')}}">Dashboard</a></li>
-        <li><a href="{{route('admin::user.all.index')}}">Alle gebruikers</a></li>
+        <li><a href="{{route('admin::role.all.index')}}">Alle rollen</a></li>
         <li class="active">toevoegen</li>
     </ol>
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -114,7 +114,7 @@
             </div>
             </div>
             <?php
-            $frmHeader = "Nieuwe gebruiker toevoegen";
+            $frmHeader = "Nieuwe rol toevoegen";
 
 /*
             if ((null !== (request()->get('parent_id')))){
@@ -138,9 +138,9 @@
 
 
 
-            {{ Form::open(['route'=>array('admin::user.store'), 'class'=>'forxm-horizontal foxrm-padding']) }}
+            {{ Form::open(['route'=>array('admin::role.store'), 'class'=>'forxm-horizontal foxrm-padding']) }}
 
-            @include('user::partials.form', ['submitButtonText' => 'Gebruiker toevoegen','frmHeader'=>''.$frmHeader.''])
+            @include('user::role.partials.form', ['submitButtonText' => 'Rol toevoegen','frmHeader'=>''.$frmHeader.''])
 
 
             {{ Form::close() }}
